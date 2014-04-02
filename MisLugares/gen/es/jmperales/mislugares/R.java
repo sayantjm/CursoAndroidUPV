@@ -54,10 +54,10 @@ public final class R {
         public static final int accion_guardar=0x7f0a002b;
         public static final int accion_llegar=0x7f0a0030;
         public static final int acercaDe=0x7f0a002d;
-        public static final int btnAcercaDe=0x7f0a0005;
-        public static final int btnMostrar=0x7f0a0003;
-        public static final int btnPreferencias=0x7f0a0004;
-        public static final int btnSalir=0x7f0a0006;
+        public static final int btnAcercaDe=0x7f0a0007;
+        public static final int btnMostrar=0x7f0a0004;
+        public static final int btnPreferencias=0x7f0a0005;
+        public static final int btnSalir=0x7f0a0008;
         public static final int comboTipo=0x7f0a000f;
         public static final int comentario=0x7f0a0023;
         public static final int config=0x7f0a002c;
@@ -87,8 +87,8 @@ public final class R {
         public static final int menu_buscar=0x7f0a002e;
         public static final int nombre=0x7f0a0019;
         public static final int scrollView1=0x7f0a0018;
-        public static final int tableRow1=0x7f0a0007;
-        public static final int tableRow2=0x7f0a0008;
+        public static final int tableRow1=0x7f0a0003;
+        public static final int tableRow2=0x7f0a0006;
         public static final int tableRow3=0x7f0a0009;
         public static final int tableRow4=0x7f0a000a;
         public static final int telefono=0x7f0a001f;

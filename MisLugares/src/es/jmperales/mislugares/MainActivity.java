@@ -1,7 +1,7 @@
 package es.jmperales.mislugares;
 
-import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,55 +11,30 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class MainActivity extends Activity {
+public class MainActivity extends ListActivity {
 
 	private Button btnAcercaDe;
 	private Button btnSalir;
 	private Button btnPreferencias;
 	private Button btnMostrar;
+	
+	public BaseAdapter adaptador;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		btnAcercaDe = (Button) findViewById(R.id.btnAcercaDe);
-		btnSalir = (Button) findViewById(R.id.btnSalir);
-		btnPreferencias = (Button) findViewById(R.id.btnPreferencias);
-		btnMostrar = (Button) findViewById(R.id.btnMostrar);
-
-		btnAcercaDe.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				lanzarAcercaDe(v);
-			}
-		});
-
-		btnSalir.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				finish();
-			}
-		});
-
-		btnPreferencias.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				lanzarPreferencias(v);
-			}
-		});
-
-		btnMostrar.setOnClickListener(new OnClickListener() {
-			public void onClick(View view) {
-				// mostrarPreferencias(view);
-				lanzarVistaLugar(view);
-			}
-		});
+		adaptador = new ArrayAdapter<String>(this, 
+                android.R.layout.simple_list_item_1, 
+                Lugares.listaNombres()); 
+		setListAdapter(adaptador);
 
 	}
 
