@@ -11,10 +11,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 public class MainActivity extends ListActivity {
@@ -31,10 +31,7 @@ public class MainActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		adaptador = new ArrayAdapter<String>(this,
-			       R.layout.elemento_lista,
-			       R.id.nombre,
-			       Lugares.listaNombres());
+		adaptador = new AdaptadorLugares(this);
 		setListAdapter(adaptador);
 
 	}
@@ -78,7 +75,7 @@ public class MainActivity extends ListActivity {
 		Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
 	}
 
-	public void lanzarVistaLugar_old(View view) {
+/*	public void lanzarVistaLugar_old(View view) {
 		Intent i = new Intent(this, VistaLugar.class);
 		i.putExtra("id", (long) 0);
 		startActivity(i);
@@ -99,5 +96,14 @@ public class MainActivity extends ListActivity {
 						startActivity(i);
 					}
 				}).setNegativeButton("Cancelar", null).show();
+	}*/
+	
+	@Override 
+	protected void onListItemClick(ListView listView, 
+	                         View vista, int posicion, long id) {
+	   super.onListItemClick(listView, vista, posicion, id);
+	   Intent intent= new Intent(this, VistaLugar.class);
+	   intent.putExtra("id", id);
+	   startActivity(intent);
 	}
 }
