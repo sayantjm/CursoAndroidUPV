@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">My Places</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="btnMostrar">Show Places</string>
+    <string name="btnPreferencias">Settings</string>
+    <string name="btnAcercaDe">About us</string>
+    <string name="btnSalir">Exit</string>
+    <string name="lblMisLugares">My Places</string>
+    <string name="lblNombre">Name:</string>
+    <string name="inputNombreHINT">Something to identify the place</string>
+    <string name="lblTipo">Type:</string>
+    <string name="lblDireccion">Address:</string>
+    <string name="inputDireccionHINT">Place address</string>
+    <string name="lblTelefono">Phone:</string>
+    <string name="inputTelefonoHINT">contact phone</string>
+    <string name="lblUrl">Url:</string>
+    <string name="inputUrlHINT">web page</string>
+    <string name="lblComentario">Annotation:</string>
+    <string name="inputComentarioHINT">insert your notes</string>
+
+</resources>
