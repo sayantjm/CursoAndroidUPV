@@ -9,6 +9,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -28,6 +29,7 @@ public class VistaLugar extends Activity {
 	final static int RESULTADO_GALERIA = 2;
 	final static int RESULTADO_FOTO = 3;
 	private Uri uriFoto;
+	private ImageView foto;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,7 @@ public class VistaLugar extends Activity {
 		Bundle extras = getIntent().getExtras();
 		id = extras.getLong("id", -1);
 		lugar = Lugares.elemento((int) id);
+		foto = (ImageView) findViewById(R.id.foto);
 
 		actualizarVistas();
 	}
@@ -99,14 +102,15 @@ public class VistaLugar extends Activity {
 		} else if (requestCode == RESULTADO_GALERIA
 				&& resultCode == Activity.RESULT_OK) {
 			lugar.setFoto(data.getDataString());
-			ImageView imageView = (ImageView)findViewById(R.id.foto);
+			ImageView imageView = (ImageView) findViewById(R.id.foto);
 			ponerFoto(imageView, lugar.getFoto());
-		} else if(requestCode == RESULTADO_FOTO && resultCode == Activity.RESULT_OK
-		        && lugar!=null && uriFoto!=null) {
-		       lugar.setFoto(uriFoto.toString());
-		       ImageView imageView = (ImageView)findViewById(R.id.foto);
-		       ponerFoto(imageView, lugar.getFoto());
-		       actualizarVistas();
+		} else if (requestCode == RESULTADO_FOTO
+				&& resultCode == Activity.RESULT_OK && lugar != null
+				&& uriFoto != null) {
+			lugar.setFoto(uriFoto.toString());
+			ImageView imageView = (ImageView) findViewById(R.id.foto);
+			ponerFoto(imageView, lugar.getFoto());
+			actualizarVistas();
 		}
 	}
 
@@ -175,9 +179,7 @@ public class VistaLugar extends Activity {
 						lugar.setValoracion(valor);
 					}
 				});
-		
-		ImageView imageView = (ImageView)findViewById(R.id.foto);
-		ponerFoto(imageView, lugar.getFoto());
+		ponerFoto(foto, lugar.getFoto());
 	}
 
 	public void verMapa(View view) {
@@ -203,32 +205,44 @@ public class VistaLugar extends Activity {
 	}
 
 	public void galeria(View view) {
-		Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+		Intent intent = new Intent();
+		// KITKAT version check
+		if (Build.VERSION.SDK_INT < 19) {
+			intent.setAction(Intent.ACTION_GET_CONTENT);
+		} else {
+			intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
+		}
+
+		//Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 		intent.addCategory(Intent.CATEGORY_OPENABLE);
 		intent.setType("image/*");
 		startActivityForResult(intent, RESULTADO_GALERIA);
 	}
-	
+
 	protected void ponerFoto(ImageView imageView, String uri) {
-	    if (uri != null) {
-	        imageView.setImageURI(Uri.parse(uri));
-	    } else{
-	        imageView.setImageBitmap(null);
-	    }
+		if (uri != null) {
+			imageView.setImageURI(Uri.parse(uri));
+		} else {
+			// imageView.setImageBitmap(null);
+			imageView.setImageDrawable(getResources().getDrawable(
+					R.drawable.foto_epsg));
+		}
 	}
-	
+
 	public void tomarFoto(View view) {
-	    Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-	    uriFoto = Uri.fromFile(
-	        new File(Environment.getExternalStorageDirectory() + File.separator
-	        + "img_" + (System.currentTimeMillis() / 1000) + ".jpg"));
-	    intent.putExtra(MediaStore.EXTRA_OUTPUT, uriFoto);
-	    startActivityForResult(intent, RESULTADO_FOTO);
+		Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+		uriFoto = Uri.fromFile(new File(Environment
+				.getExternalStorageDirectory()
+				+ File.separator
+				+ "img_"
+				+ (System.currentTimeMillis() / 1000) + ".jpg"));
+		intent.putExtra(MediaStore.EXTRA_OUTPUT, uriFoto);
+		startActivityForResult(intent, RESULTADO_FOTO);
 	}
-	
+
 	public void eliminarFoto(View view) {
-	       lugar.setFoto(null);
-	       ImageView imageView = (ImageView)findViewById(R.id.foto);
-	       ponerFoto(imageView, null);
+		lugar.setFoto(null);
+		ImageView imageView = (ImageView) findViewById(R.id.foto);
+		ponerFoto(imageView, null);
 	}
 }
