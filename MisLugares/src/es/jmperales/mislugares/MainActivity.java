@@ -1,10 +1,9 @@
 package es.jmperales.mislugares;
 
-import android.app.AlertDialog;
 import android.app.ListActivity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
@@ -13,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -23,8 +21,10 @@ public class MainActivity extends ListActivity {
 	private Button btnSalir;
 	private Button btnPreferencias;
 	private Button btnMostrar;
+	//private MediaPlayer mp; //Descomentar para poner música
 	
 	public BaseAdapter adaptador;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +33,9 @@ public class MainActivity extends ListActivity {
 
 		adaptador = new AdaptadorLugares(this);
 		setListAdapter(adaptador);
+		
+		//mp = MediaPlayer.create(this, R.raw.audio); //Descomentar para poner música
+		//mp.start();//Descomentar para poner música
 
 	}
 
@@ -105,5 +108,36 @@ public class MainActivity extends ListActivity {
 	   Intent intent= new Intent(this, VistaLugar.class);
 	   intent.putExtra("id", id);
 	   startActivity(intent);
+	}
+	
+	/**
+	 * Estado de la aplicación
+	 */
+	
+	@Override
+	protected void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+		//mp.start();//Descomentar para poner música
+	}
+	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		//super.onPause();//Descomentar para poner música
+	}
+	
+	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
+		//mp.pause();//Descomentar para poner música
+	}
+	
+	@Override
+	protected void onRestart() {
+		// TODO Auto-generated method stub
+		super.onRestart();
+		//mp.start();//Descomentar para poner música
 	}
 }
