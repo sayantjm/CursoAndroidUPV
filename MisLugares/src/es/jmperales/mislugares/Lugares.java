@@ -6,6 +6,8 @@ import java.util.List;
 public class Lugares {
 
 	protected static List<Lugar> vectorLugares = ejemploLugares();
+	final static String TAG = "MisLugares";
+	protected static GeoPunto posicionActual = new GeoPunto(0,0);
 
 	public Lugares() {
 		vectorLugares = ejemploLugares();

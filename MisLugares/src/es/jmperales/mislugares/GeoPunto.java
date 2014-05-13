@@ -44,5 +44,12 @@ public class GeoPunto {
 		this.latitud = latitud;
 	}
 	
+	public void setLongitud(double longitud) {
+		this.longitud = (int) (longitud * 1E6);		
+	}
+	
+	public void setLatitud(double latitud) {
+		this.latitud = (int) (latitud * 1E6);
+	}
 	
 }
